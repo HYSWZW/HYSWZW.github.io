@@ -72,12 +72,12 @@ var CONFIG = {
 };
 
 window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Weigr的小站</div><div class="header-banner-info__subtitle">永远保持一颗学徒的心</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">VulnHub靶机系列:BlackMarket</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-12-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-12-19</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.7k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">36分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
-        <h3   id="前言" >
+        <h3 id="前言">
           <span class="heading-link">前言</span>
         </h3>
       <p><strong>环境:</strong><br>靶机:192.168.41.129<br>kali:192.168.41.128<br><strong>说明:</strong><br>这个靶机总共有6个flag和一个root flag。每个flag都指向另一个flag，flag格式为Flag{xxx}.<br><strong>难度:</strong><br>初级/中级<br><strong>要点:</strong><br>枚举、信息整合</p>
 
-        <h3   id="信息收集" >
+        <h3 id="信息收集">
           <span class="heading-link">信息收集</span>
         </h3>
       <p>端口扫描：<br><img src="/images/3.png" alt="端口扫描"><br>发现开了80web端口,访问之:<br><img src="/images/web.png" alt="web页面"><br>查看源代码,发现第一个flag:<br><img src="/images/flag1.png" alt="flag1"><br>看着flag格式有点熟悉呢,好像是BASE64编码的,解开得到:</p>
@@ -95,7 +95,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <p>赶紧登上看看，工具就用Kali自带的FileZilla,发现就只有一个文件，下载到本地：<br><img src="/images/ftp_login.png" alt="登录ftp"><br>打开看下内容：<br><img src="/images/flag2.png" alt="flag2"><br>发现第二个flag：</p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flag2&#123;Q29uZ3JhdHMgUHJvY2VlZCBGdXJ0aGVy&#125;</span><br><span class="line">解开得到: Congrats Proceed Further # 恭喜你又进一步</span><br><span class="line">下面还有一句话:</span><br><span class="line">If anyone reading this message it means you are on the right track however I do not have any idea about the CIA blackmarket Vehical workshop. You must find out and hack it!</span><br><span class="line">如果你读到这条信息，这意味着你走在正确的道路上，但我不知道中情局黑市车辆车间。你必须找出并破解它！</span><br></pre></td></tr></table></div></figure>
 
-        <h3   id="目录枚举" >
+        <h3 id="目录枚举">
           <span class="heading-link">目录枚举</span>
         </h3>
       <p>我觉得重点应该是<strong>CIA blackmarket Vehical workshop</strong>，但去哪里找这个玩意儿呢。先试试用这个账号登录SSH：</p>
@@ -106,7 +106,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://129.168.41.129 ./1.txt</span><br></pre></td></tr></table></div></figure>
 <p>啥都没跑出来…..不知道为啥，字典不对？但想来作者应该不会整的太复杂，不然没法做啊。<br><strong>Two years later…..</strong><br>最后试了给关键字加前缀<br><img src="/images/prefix.png" alt="增加前缀"><br>成功跑出目录….我太难了<br><img src="/images/vworkshop.png" alt="vworkshop"><br>好家伙，我TM直接好家伙，原来提示里面直接就给指出了目录的。<strong>CIA blackmarket Vehical workshop</strong>，其他单词都没首字母大写，就<strong>Vehical</strong>大写了，这不是疯狂暗示<strong>vworkshop</strong>吗，hai~，还是不够细心啊，总是后知后觉。</p>
 
-        <h3   id="SQL注入拿到关键数据" >
+        <h3 id="SQL注入拿到关键数据">
           <span class="heading-link">SQL注入拿到关键数据</span>
         </h3>
       <p>不管那么多先访问再说：<code>http://192.168.41.129/vworkshop</code><br><img src="/images/4.png" alt="访问目录"><br>东点点西点点，竟然发现登录框有SQL注入哈哈…</p>
@@ -186,7 +186,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">admin&#x2F;BigBossCIA  # 成功登录,并提示:</span><br><span class="line">Login Success, Welcome BigBOSS! here is your flag4&#123;bm90aGluZyBpcyBoZXJl&#125; </span><br><span class="line">Jason Bourne Email access ?????</span><br></pre></td></tr></table></div></figure>
 <p><img src="/images/8.png" alt="flag4"><br>出现第四个flag，解码得到: 这儿啥都没有<br><img src="/images/9.png" alt="nothing"></p>
 
-        <h3   id="进入邮箱" >
+        <h3 id="进入邮箱">
           <span class="heading-link">进入邮箱</span>
         </h3>
       <p>提示我们:<strong>Jason Bourne Email access ?????</strong>,按照我们之前的经验，给我们的提示一向都很准确，并且flag3中也提到Find Jason Bourne Email access，那现在的关键就是找到邮箱密码进去邮箱：</p>
@@ -199,7 +199,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flag5&#123;RXZlcnl0aGluZyBpcyBlbmNyeXB0ZWQ&#x3D;&#125;</span><br></pre></td></tr></table></div></figure>
 <p><img src="/images/12.png" alt="信息加密"></p>
 
-        <h3   id="破解加密邮件" >
+        <h3 id="破解加密邮件">
           <span class="heading-link">破解加密邮件</span>
         </h3>
       <p>并得到提示，<em>一切都被加密了</em>。看着底下的信息确实像是以某种方式给加密了</p>
@@ -224,13 +224,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5215565757312090656(10进制)----&gt;4861696c4b474220(16进制)----&gt;HailKGB(text)</span><br></pre></td></tr></table></div></figure>
 <p>最后密码为<strong>HailKGB</strong>，我拿去翻译了一下，好家伙，直接给我九头蛇万岁！<br><img src="/images/16.png" alt="克格勃万岁!"></p>
 
-        <h3   id="进入后门" >
+        <h3 id="进入后门">
           <span class="heading-link">进入后门</span>
         </h3>
       <p>F12输入密码后,duang~,直接进入后门：<br><img src="/images/17.png" alt="大马儿!"><br>哇哦~,界面超酷炫，我超喜欢。然后进去就是一顿翻腾，直接首页找到第六个flag也是最后一个：<br><img src="/images/18.png" alt="flag6"></p>
 <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag6&#123;Um9vdCB0aW1l&#125;  # 解码得到 Root time, 看来就差最后一步提权了</span><br></pre></td></tr></table></div></figure>
 
-        <h3   id="获取root权限" >
+        <h3 id="获取root权限">
           <span class="heading-link">获取root权限</span>
         </h3>
       <p>提权没有前面那么复杂，在系统上一通乱翻，发现/home/目录里有个小玩意儿(其实用脏牛也能提权)<br><img src="/images/19.png" alt="小玩意儿"><br>上面写着：</p>
@@ -242,7 +242,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <p>然后输入DimitryHateApple，纳尼，密码竟然不对，都最后一步了都还要卖关子，不愧是你，真牛逼。<br>此时此刻我聪明的小脑瓜飞速转动(其实是结合前面作者的尿性)，大胆猜测方向是肯定没错，多半哪里细节不对。然后我回去好好看了看，索德斯呢，<em>DimitryHateApple<em>中的用户名i成了y，换过来试试：</em>DimitriHateApple</em><br><img src="/images/22.png" alt="开"><br>Nice~兄嘚，看看目录下有啥，都root了，还不是想看哪儿就看哪儿👀，哈哈<br><img src="/images/23.png" alt="完结"><br>不要问我为啥输入的命令有重影，我虚拟机多半是近视了。<br><strong>最后，完结撒花哈哈……..</strong></p>
 <hr>
 
-        <h3   id="结束" >
+        <h3 id="结束">
           <span class="heading-link">结束</span>
         </h3>
       <p><strong>总结：</strong></p>
@@ -255,9 +255,9 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
 <p><strong>用到的工具：</strong></p>
 <ul>
 <li>namp,cewl,hydra,john,dirb,sqlmap</li>
-<li><span class="exturl"><a class="exturl__link"   href="https://www.boxentriq.com/"  target="_blank" rel="noopener">替换密码解密网站</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link" href="https://www.boxentriq.com/" target="_blank" rel="noopener">替换密码解密网站</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ul>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://HYSWZW.github.io">Weigr</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://hyswzw.github.io/2020/12/14/VulnHub_BlackMarket/">https://hyswzw.github.io/2020/12/14/VulnHub_BlackMarket/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/%E9%9D%B6%E6%9C%BA/">靶机</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/VulnHub/">VulnHub</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/12/20/gitalk-fix/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">gitalk_fix</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/04/11/linux-command-order/"><span class="paginator-prev__text">Linux命令的查找顺序</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://HYSWZW.github.io">Weigr</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://hyswzw.github.io/2020/12/14/VulnHub_BlackMarket/">https://hyswzw.github.io/2020/12/14/VulnHub_BlackMarket/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/%E9%9D%B6%E6%9C%BA/">靶机</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/VulnHub/">VulnHub</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/12/20/gitalk-fix/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Gitalk报错的解决方法</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/04/11/linux-command-order/"><span class="paginator-prev__text">Linux命令的查找顺序</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">
           前言
         </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信息收集"><span class="toc-number">2.</span> <span class="toc-text">
           信息收集
