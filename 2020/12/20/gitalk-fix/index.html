@@ -5,18 +5,18 @@
 <meta property="og:site_name" content="Weigr的小站">
 <meta property="og:description" content="前言                前段时间用hexo+stun搭建了一个博客。这两天在弄博客的评论系统,最后选择用了Gittalk(Gitalk是一个基于Github issues的评论系统)来构建评论系统。但遇到一点小问题，如下图所示，一直提示”Error:Not Found”  所幸最后解决了,本文用于记录该问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/not_found.png">
-<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/issue_open.png">
-<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/issue_open.png">
-<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/not_found.png">
-<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/nice.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/not_found.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/issue_open.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/issue_open.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/not_found.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/nice.png">
 <meta property="article:published_time" content="2020-12-20T08:22:45.000Z">
 <meta property="article:modified_time" content="2020-12-20T10:29:43.859Z">
 <meta property="article:author" content="Weigr">
 <meta property="article:tag" content="gittalk">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/.io//12/20/gitalk-fix/not_found.png"><meta name="keywords" content="Weigr, Weigr的小站"><meta name="description" content=""><title>Gitalk报错的解决方法</title><link ref="canonical" href="https://hyswzw.github.io/2020/12/20/gitalk-fix/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.7.0"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://hyswzw.github.io/2020/12/20/gitalk-fix/not_found.png"><meta name="keywords" content="Weigr, Weigr的小站"><meta name="description" content=""><title>Gitalk报错的解决方法</title><link ref="canonical" href="https://hyswzw.github.io/2020/12/20/gitalk-fix/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.7.0"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
@@ -44,7 +44,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
           <span class="heading-link">前言</span>
         </h3>
       <p>前段时间用hexo+stun搭建了一个博客。这两天在弄博客的评论系统,最后选择用了Gittalk(Gitalk是一个基于Github issues的评论系统)来构建评论系统。但遇到一点小问题，如下图所示，一直提示”Error:Not Found”</p>
-<img src=".io//12/20/gitalk-fix/not_found.png" class title="Error">
+<img src="/2020/12/20/gitalk-fix/not_found.png" class title="Error">
 <p>所幸最后解决了,本文用于记录该问题。</p>
 
         <h3 id="操作步骤">
@@ -53,18 +53,18 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></he
       <p>先按照主题手册做:</p>
 <ol>
 <li>新建一个用于评论的仓库,这里我的仓库名为:Comment</li>
-<li>仓库settings里面开启issue评论,方法如下图:<img src=".io//12/20/gitalk-fix/issue_open.png" class title="开放issue"></li>
-<li>注册一个新的GitHub Application<br>首先在GitHub上注册新应用,链接地址:<span class="exturl"><a class="exturl__link" href="https://github.com/settings/applications/new" target="_blank" rel="noopener">注册</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><img src=".io//12/20/gitalk-fix/issue_open.png" class title="注册app">
+<li>仓库settings里面开启issue评论,方法如下图:<img src="/2020/12/20/gitalk-fix/issue_open.png" class title="开放issue"></li>
+<li>注册一个新的GitHub Application<br>首先在GitHub上注册新应用,链接地址:<span class="exturl"><a class="exturl__link" href="https://github.com/settings/applications/new" target="_blank" rel="noopener">注册</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><img src="/2020/12/20/gitalk-fix/issue_open.png" class title="注册app">
 <font color="red"><strong>注:</strong></font>因为我这儿博客域名就是用的Github默认的,XXX.github.io,所以两个是一致的,如果你用的自己的域名,则回调地址应该用自己的域名</li>
 <li>修改博客主题_config.yml<figure class="highlight yaml"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gitalk:</span></span><br><span class="line">  <span class="comment"># 是否启用</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="string">ture</span></span><br><span class="line">  <span class="comment"># Github 用户名</span></span><br><span class="line">  <span class="attr">owner:</span> <span class="string">HYSWZW</span></span><br><span class="line">  <span class="comment"># 仓库名</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/HYSWZW/Comment</span></span><br><span class="line">  <span class="comment"># Github 应用程序客户端 ID,上面注册app里</span></span><br><span class="line">  <span class="attr">client_id:</span> <span class="string">b3620a***d71cee97eb</span></span><br><span class="line">  <span class="comment"># Github 应用程序客户端密钥,上面注册app里</span></span><br><span class="line">  <span class="attr">client_secret:</span> <span class="string">77aa4a3c****673c71d9775d164d300b0cfb</span></span><br><span class="line">  <span class="comment"># GitHub 仓库所有者和合作者,只有这些人可以初始化 Gitalk.直接写Github 用户名即可</span></span><br><span class="line">  <span class="attr">admin:</span> <span class="string">HYSWZW</span></span><br><span class="line">  <span class="comment"># 类似于 B 站的关灯模式</span></span><br><span class="line">  <span class="attr">distraction_free_mode:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 如果你想让每一个参观你网站的人看到统一的语言，你可以在这里设置，</span></span><br><span class="line">  <span class="comment"># 可选值：en, zh-CN, es-ES, fr, ru, zh-TW</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">zh-CN</span></span><br></pre></td></tr></table></div></figure>
 修改好配置文件后,直接运行以下命令从新生成博客:<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g -d</span><br></pre></td></tr></table></div></figure>
-结果就出现上面图片的情况了,一直显示:”Error: Not Found”<img src=".io//12/20/gitalk-fix/not_found.png" class title="Error">
+结果就出现上面图片的情况了,一直显示:”Error: Not Found”<img src="/2020/12/20/gitalk-fix/not_found.png" class title="Error">
 
         <h3 id="解决问题">
           <span class="heading-link">解决问题</span>
         </h3>
       后来是将配置文件_config.yml里仓库名那一行改为:<br>repo: 仓库名而不是仓库链接<br>再去仓库手动开了一个issues,最后重新生成了一遍<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g -d</span><br></pre></td></tr></table></div></figure>
-大功告成<img src=".io//12/20/gitalk-fix/nice.png" class title="成功">
+大功告成<img src="/2020/12/20/gitalk-fix/nice.png" class title="成功">
 </li>
 </ol>
 </div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://HYSWZW.github.io">Weigr</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://hyswzw.github.io/2020/12/20/gitalk-fix/">https://hyswzw.github.io/2020/12/20/gitalk-fix/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/gittalk/">gittalk</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/hexo/">hexo</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2020/12/14/VulnHub_BlackMarket/"><span class="paginator-prev__text">VulnHub靶机系列:BlackMarket</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">
